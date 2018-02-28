@@ -2,7 +2,7 @@ import * as React from 'react';
 import {control} from '@retool/app';
 
 
-export default class ContactList extends React.Component<any> {
+export default class ContactList extends React.Component {
     render(){
         var rows;
         if (this.props.rows){
@@ -25,7 +25,7 @@ export default class ContactList extends React.Component<any> {
     }
 }
 
-class ContactListRow extends React.Component<{row:any,page:any}> {
+class ContactListRow extends React.Component {
     handleClick = (e) => {
         e.preventDefault();
         this.props.page.openDialog({object:"Contact",pageType:"edit",params:{id:this.props.row.Id}});

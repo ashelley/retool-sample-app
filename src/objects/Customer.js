@@ -23,28 +23,28 @@ export class DefaultLookup extends Lookup {
         {Id:"1002",Name:"Brownfield, Inc."}
     ];
     
-    fill(partialEntry: string, props: any):any{
+    fill(partialEntry, props){
         return {
             filter:{field:'Name'},
             options:DefaultLookup.data
         }
     }
 
-    find(id: string, props: any) {
+    find(id, props) {
         var data = DefaultLookup.data;
         for(var i = 0 ; i < data.length; i++){
             if (data[i].Id == id) return data[i];
         }
     }
 
-    formatDroplist(props: any) {
+    formatDroplist(props) {
         return {
             height: 8,
             showAddNew: true
         }
     }
 
-    formatOption(option: any, props): any{
+    formatOption(option, props){
         return {
             icon: "standard/account",
             text: option.Name,
@@ -52,7 +52,7 @@ export class DefaultLookup extends Lookup {
         }
     }
 
-    formatInput(value: any, props): any {
+    formatInput(value, props) {
         return {
             icon: "standard/account",
             text:value.Name

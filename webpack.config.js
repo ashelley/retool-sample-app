@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+
 module.exports = {
   entry: {
-    app:'./build/App.js',
+    app:'./src/App.js',
     vendor:['@retool/app','@retool/standard-controls']
   },
   devServer:{
@@ -14,6 +15,17 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './public')
   },
+  module: {
+    rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: [
+              'babel-loader'
+          ]
+        }
+    ]
+  },  
   externals: {
     react:'React',
     "react-dom":'ReactDOM'

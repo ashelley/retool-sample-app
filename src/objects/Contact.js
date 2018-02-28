@@ -58,7 +58,7 @@ export class EditController extends Controller {
     static DefaultLayout = {
         template: "DialogBox",
         Header: <Heading text="Editing {FirstName} {LastName}" textSize="medium" />,
-        Body: <>
+        Body: <React.Fragment>
             <Form variant="stacked">
                 <Input field="FirstName" />
                 <Input field="LastName" />
@@ -66,8 +66,8 @@ export class EditController extends Controller {
                 <Input field="Phone" />
                 <Input field="Customer" />
             </Form>
-        </>,
-        Footer: <>
+        </React.Fragment>,
+        Footer: <React.Fragment>
             <Button label="Save" variant="brand">
                 <OnClick>
                     <CallAction action="save" />
@@ -79,6 +79,6 @@ export class EditController extends Controller {
                     <CloseDialog />
                 </OnClick>
             </Button>
-        </>
+        </React.Fragment>
     }
 }
