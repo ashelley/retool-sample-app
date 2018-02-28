@@ -1,5 +1,7 @@
 import * as React from 'react'
-import {Controller,Lookup} from '@retool/app'
+import { Controller, Lookup} from '@retool/app'
+import { Card, Heading } from '../controls'
+import { CustomerApi } from "../api/MockApi"
 
 export default class Customer {
     Name = "";
@@ -10,29 +12,43 @@ export default class Customer {
         Name:{label:"Name"},
         City:{label:"City"},
         State:{label:"State"}
-    }
+    }  
 }
 
+export class HomeController extends Controller {
+
+    customer = null
+
+    init(params){
+        return CustomerApi.get(params.id).then(customer => this.customer = customer);
+    }
+
+    static DefaultLayout = {
+        template:"RecordPage",        
+        Header: (
+            <Heading text="Customer" textSize="medium" />
+        ),
+        Body: (
+            <Card title="{Name}">
+            </Card>
+        )
+    }
+}  
 
 export class DefaultLookup extends Lookup {
     placeholder = "Search on customer name...";
 
-    static data = [
-        {Id:"1000",Name:"Acme Industries"},
-        {Id:"1001",Name:"Active Manufacturing"},
-        {Id:"1002",Name:"Brownfield, Inc."}
-    ];
-    
-    fill(partialEntry, props){
-        return {
+    async fill(partialEntry, props){
+        let data = await CustomerApi.list()
+        return Promise.resolve({
             filter:{field:'Name'},
-            options:DefaultLookup.data
-        }
+            options:data
+        })
     }
 
-    find(id, props) {
-        var data = DefaultLookup.data;
-        for(var i = 0 ; i < data.length; i++){
+    async find(id, props) {
+        let data = await CustomerApi.get(id)
+        for(let i = 0 ; i < data.length; i++){
             if (data[i].Id == id) return data[i];
         }
     }

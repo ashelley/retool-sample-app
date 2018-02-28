@@ -6,9 +6,9 @@ export class ContactApi {
     ]
 
     static get(id) {
-        var data = ContactApi.data;
+        let data = this.data
         return new Promise((resolve, reject) => {
-            for (var i = 0; i < ContactApi.data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 if (data[i].Id == id) {
                     return resolve(data[i]);
                 }
@@ -18,6 +18,30 @@ export class ContactApi {
     }
 
     static list(){
-        return Promise.resolve(ContactApi.data);
+        return Promise.resolve(this.data);
     }
+}
+
+export class CustomerApi {
+    static data = [
+        {Id:"1000",Name:"Acme Industries"},
+        {Id:"1001",Name:"Active Manufacturing"},
+        {Id:"1002",Name:"Brownfield, Inc."}
+    ];    
+
+    static get(id) {
+        let data = this.data
+        return new Promise((resolve, reject) => {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].Id == id) {
+                    return resolve(data[i]);
+                }
+            }
+            reject("Could not find customer: " + id);
+        })        
+    }
+
+    static list(){
+        return Promise.resolve(this.data);
+    }    
 }

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Controller } from '@retool/app'
-import { Heading, Form, Input, Text, Button, Spacer, ContactList } from '../controls'
-import { If, ElseIf, Else, ForEach, OnClick, SetField, CallAction, Validator, CloseDialog } from "@retool/app"
+import { Heading, Form, Input, Text, Button, Spacer, ContactList, Link } from '../controls'
+import { If, ElseIf, Else, ForEach, OnClick, SetField, CallAction, Validator, CloseDialog, Navigate } from "@retool/app"
 import { ContactApi } from "../api/MockApi"
 
 
@@ -65,6 +65,12 @@ export class EditController extends Controller {
                 <Input field="Email" />
                 <Input field="Phone" />
                 <Input field="Customer" />
+                <Link label="Click here">
+                    <OnClick>
+                        <Navigate object="customer" id="{Customer.Id}"/>
+                        <CloseDialog />
+	                </OnClick>
+                </Link>                
             </Form>
         </React.Fragment>,
         Footer: <React.Fragment>

@@ -16,7 +16,7 @@ export {
     StaticField,
     TabPanel,
     TabSet,
-    Text
+    Text,
 } from '@retool/standard-controls'
 
 // custom controls
